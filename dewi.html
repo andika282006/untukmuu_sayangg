@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Sayangku</title>
+    <style>
+        /* CSS - Desain Estetik & Romantis */
+        :root {
+            --pink-soft: #ffdde1;
+            --pink-dark: #ee9ca7;
+            --pink-love: #ff4d6d;
+            --white: #ffffff;
+            --text-color: #4a4a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pink-soft) 0%, #fff5f7 50%, var(--pink-dark) 100%);
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 30px;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            animation: fadeInDown 1s ease;
+            width: 100%;
+            position: relative;
+        }
+
+        .header-heart {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            font-size: 2.2rem;
+            color: var(--pink-love);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, var(--pink-love), #ff8fa3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 1rem;
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            background: linear-gradient(145deg, var(--white), #fff5f7);
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            transform: rotate(var(--r)) translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .photo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .photo-card:hover::before {
+            left: 100%;
+        }
+
+        .photo-card:nth-child(even) { --r: 1.5deg; }
+        .photo-card:nth-child(odd) { --r: -1.5deg; }
+
+        .photo-card:active {
+            transform: scale(0.95) rotate(0deg) translateY(5px);
+        }
+
+        .photo-card.touched {
+            animation: cardBounce 0.5s ease;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            filter: brightness(0.95);
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.2));
+            height: 30px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            color: var(--pink-love);
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+            animation: float 3s ease-in-out forwards;
+            user-select: none;
+        }
+
+        /* Background Floating Hearts */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.15);
+            font-size: 40px;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatSlow 15s linear infinite;
+        }
+
+        @keyframes float {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0.5); 
+                opacity: 1; 
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: translateY(50vh) rotate(180deg) scale(1.2); 
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg) scale(1.5); 
+                opacity: 0; 
+            }
+        }
+
+        @keyframes floatSlow {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes cardBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0) rotate(var(--r)); }
+            50% { transform: translateY(-5px) rotate(var(--r)); }
+        }
+
+        /* Footer / Pesan */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .btn-love {
+            background: linear-gradient(45deg, var(--pink-love), #ff8fa3);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(255, 77, 109, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-love::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .btn-love:active::after {
+            animation: ripple 0.6s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+
+        .btn-love:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.6);
+        }
+
+        .love-message {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            padding: 0 15px;
+            font-style: italic;
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+        }
+
+        /* Responsive */
+        @media (max-width: 360px) {
+            .gallery {
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .photo-card img {
+                height: 150px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 700px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--pink-love);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-heart">💖</div>
+        <h1>Halooo dewikuu ❤️</h1>
+        <p class="subtitle">Setiap kamu ngirim pap ke akuu, aku sangat senangg kayak ihh cakep bet euyy pokonamah lopyuu wehh</p>
+    </header>
+
+    <main class="gallery">
+        <div class="photo-card">
+            <img src="gambar/poto1.jpeg" alt="Foto 1">
+            <div class="photo-overlay"></div>
+        </div>
+        <div class="photo-card">
+            <img src="gambar/poto2.jpeg" alt="Foto 2">
+            <div class="photo-overlay"></div>
+        </div>
+        <div class="photo-card">
+            <img src="gambar/poto3.jpeg" alt="Foto 3">
+            <div class="photo-overlay"></div>
+        </div>
+        <div class="photo-card">
+            <img src="gambar/poto4.jpeg" alt="Foto 4">
+            <div class="photo-overlay"></div>
+        </div>
+        <div class="photo-card">
+            <img src="gambar/poto5.jpeg" alt="Foto 5">
+            <div class="photo-overlay"></div>
+        </div>
+        <div class="photo-card">
+            <img src="gambar/poto6.jpeg" alt="Foto 6">
+            <div class="photo-overlay"></div>
+        </div>
+    </main>
+
+    <footer>
+        <button class="btn-love" onclick="makeHearts()">klik ini Sayangg! 💖</button>
+        <p class="love-message">"bagian terindah dari kehidupan adalah mencintaimu dan dicintai olehmu, maka seterusnya kamulahh yang akan kucintaii"</p>
+    </footer>
+
+    <script>
+        // Tambahkan background hearts
+        function createBackgroundHearts() {
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('bg-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                document.body.appendChild(heart);
+            }
+        }
+
+        // Efek hati bertebaran
+        function makeHearts() {
+            const btn = document.querySelector('.btn-love');
+            btn.classList.add('active');
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = '85vh';
+                    heart.style.opacity = Math.random() * 0.5 + 0.5;
+                    heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+            
+            // Efek suara getaran (untuk mobile)
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate([100, 50, 100]);
+            }
+            
+            // Pesan acak
+            const messages = [
+                "your eyes, your voice and your smile, i love it 💖",
+                "you're my favorite part of every day ✨",
+                "thank you for coming into my life 🌹",
+                "i'm lucky to have you 🥰",
+                "forever about you dewikuu 💕"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Tampilkan pesan dengan efek
+            setTimeout(() => {
+                const messageDiv = document.createElement('div');
+                messageDiv.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(255, 77, 109, 0.95);
+                    color: white;
+                    padding: 20px 30px;
+                    border-radius: 20px;
+                    font-weight: bold;
+                    text-align: center;
+                    z-index: 1002;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                    animation: fadeInDown 0.5s ease;
+                    max-width: 80%;
+                `;
+                messageDiv.textContent = randomMessage;
+                document.body.appendChild(messageDiv);
+                
+                setTimeout(() => {
+                    messageDiv.style.animation = 'fadeInDown 0.5s ease reverse';
+                    setTimeout(() => messageDiv.remove(), 500);
+                }, 2000);
+            }, 500);
+        }
+
+        // Animasi card saat muncul
+        const cards = document.querySelectorAll('.photo-card');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = "translateY(0) rotate(var(--r))";
+                    
+                    // Tambahkan animasi mengambang lembut
+                    entry.target.style.animation = 'gentleFloat 3s ease-in-out infinite';
+                    entry.target.style.animationDelay = (Math.random() * 2) + 's';
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        cards.forEach((card, index) => {
+            card.style.opacity = 0;
+            card.style.transform = "translateY(30px)";
+            card.style.transition = "all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            card.style.transitionDelay = (index * 0.1) + 's';
+            observer.observe(card);
+            
+            // Efek sentuhan pada card
+            let touchTimer;
+            card.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                clearTimeout(touchTimer);
+                this.classList.add('touched');
+                
+                // Efek hati kecil saat disentuh
+                const miniHeart = document.createElement('div');
+                miniHeart.innerHTML = '💕';
+                miniHeart.style.cssText = `
+                    position: absolute;
+                    top: ${e.touches[0].clientY - card.getBoundingClientRect().top}px;
+                    left: ${e.touches[0].clientX - card.getBoundingClientRect().left}px;
+                    font-size: 20px;
+                    pointer-events: none;
+                    z-index: 10;
+                    animation: float 1s ease-out forwards;
+                `;
+                this.appendChild(miniHeart);
+                
+                setTimeout(() => miniHeart.remove(), 1000);
+            });
+            
+            card.addEventListener('touchend', function() {
+                touchTimer = setTimeout(() => {
+                    this.classList.remove('touched');
+                }, 300);
+            });
+        });
+
+        // Inisialisasi background hearts
+        createBackgroundHearts();
+
+        // Efek parallax ringan
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            document.querySelector('header').style.transform = `translateY(${rate * 0.3}px)`;
+        });
+
+        // Mencegah zoom dengan double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Load gambar dengan efek
+        window.addEventListener('load', () => {
+            document.body.style.opacity = 1;
+        });
+    </script>
+</body>
+</html>
